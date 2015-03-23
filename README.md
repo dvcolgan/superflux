@@ -1,4 +1,4 @@
-# Hornburg!
+# Superflux!
 
 Opinionated model layer for Mithril based on Flux
 
@@ -14,22 +14,22 @@ Coming from the Paul Graham school of "code brevity is next to godliness," it wa
 
 And so, like all good little programmers, I decided that I could do one better.  Also all of the Flux libraries only seem to want to play nicely with React.js, which is cool for me, Mithril is simpler to understand and less verbose, so I made a Flux for Mithril.  I'm also hoping to add a full example with API, as I think I've got a way of doing it cleanly here.
 
-In keeping with the theme of fantasy/Tolkein references, this library is called Hornburg, after the fortress in the Two Towers because it holds your data.
+Superflux was the first thing that came to mind for a name and I can't think of anything better.  If anyone else has any ideas I'm open to changing it.
 
 Is this all a good idea?  We'll shall see.
 
 ## Installation
 
-    npm install hornburg
+    npm install superflux
 
 ## Usage
 
-Currently you must be using Browserify or something similar that allows you to `require` packages installed from npm.  In a file in the root of your project, perhaps in a file called `flux.js`, create an instance of hornburg and export it for the app to use.  If you are going to be using socket.io, create a new socket and pass it in as well:
+Currently you must be using Browserify or something similar that allows you to `require` packages installed from npm.  In a file in the root of your project, perhaps in a file called `flux.js`, create an instance of superflux and export it for the app to use.  If you are going to be using socket.io, create a new socket and pass it in as well:
 
-    var Hornburg = require('hornburg')
+    var Superflux = require('superflux')
     var io = require('socket.io-client')
 
-    var flux = new Hornburg({socket: io()});
+    var flux = new Superflux({socket: io()});
     module.exports = flux;
 
 Then, somewhere, perhaps in a file called `actions.js`, declare your flux actions.  `flux.createActions` can create 4 different types of actions:
@@ -80,3 +80,5 @@ Then, somewhere, perhaps in a file called `actions.js`, declare your flux action
             }
         }
     });
+
+    # TODO do more documentations
