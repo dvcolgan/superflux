@@ -1,0 +1,39 @@
+{
+    "name": "superflux",
+    "version": "0.0.1",
+    "description": "Opinionated model layer for Mithril based on Flux",
+    "keywords": [
+        "flux",
+        "mithril",
+        "superflux"
+    ],
+    "files": [
+        "index.js",
+        "src/",
+        "LICENSE"
+    ],
+    "main": "index.js",
+    "author": {
+        "name": "David Colgan",
+        "email": "dvcolgan@gmail.com",
+        "url": "http://lessboring.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dvcolgan/superflux"
+    },
+    "bugs": {
+        "url": "https://github.com/dvcolgan/superflux/issues"
+    },
+    "license": "MIT",
+    "scripts": {
+        "test": "jest"
+    },
+    "jest": {
+        "rootDir": "src",
+        "scriptPreprocessor": "../jest-preprocessor.js"
+    },
+    "dependencies": {
+        "mithril": "^0.1.30"
+    }
+}
