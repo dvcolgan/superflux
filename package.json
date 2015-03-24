@@ -1,6 +1,6 @@
 {
     "name": "superflux",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Opinionated model layer for Mithril based on Flux",
     "keywords": [
         "flux",
