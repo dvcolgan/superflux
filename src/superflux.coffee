@@ -35,7 +35,7 @@ module.exports = class SuperFlux
         socketListen = spec.socketListen or []
         socketEmit = spec.socketEmit or []
         local = spec.local or []
-        async = spec.local or {}
+        async = spec.async or {}
 
         callbacks = @callbacks
         actions = @actions
