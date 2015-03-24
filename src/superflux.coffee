@@ -32,9 +32,9 @@ module.exports = class SuperFlux
         return store
 
     createActions: (spec) ->
-        socketListen = spec.socketListen or {}
-        socketEmit = spec.socketEmit or {}
-        local = spec.local or {}
+        socketListen = spec.socketListen or []
+        socketEmit = spec.socketEmit or []
+        local = spec.local or []
         async = spec.local or {}
 
         callbacks = @callbacks
