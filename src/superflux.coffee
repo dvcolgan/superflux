@@ -25,9 +25,9 @@ module.exports = class SuperFlux
                     @callbacks[actionName] = []
                 @callbacks[actionName].push(value.bind(store))
 
-            # Call the constructor if present
-            if 'init' of store
-                store.init()
+        # Call the constructor if present
+        if 'init' of store
+            store.init()
 
         return store
 
