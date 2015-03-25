@@ -62,6 +62,23 @@ module.exports = class SuperFlux
                 
         Object.keys(async).map (name) ->
             configFn = async[name]
+
+            successFnName = name + 'Success'
+            failureFnName = name + 'Failure'
+
+            successFn = (res) ->
+                if successFnName of callbacks
+                    for callback in callbacks[successFnName]
+                        callback(res)
+
+            failureFn = (res) ->
+                if failureFnName of callbacks
+                    for callback in callbacks[failureFnName]
+                        callback(res)
+
+            actions[successFnName] = successFn
+            actions[failureFnName] = failureFn
+
             actions[name] = (args) ->
                 if name of callbacks
                     for callback in callbacks[name]
@@ -73,5 +90,6 @@ module.exports = class SuperFlux
                     url: options.url
                     data: options.data
                     background: true
+                .then(successFn, failureFn)
 
         return @actions
