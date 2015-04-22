@@ -3,12 +3,17 @@ m = require('mithril')
 
 module.exports = class SuperFlux
     constructor: (args) ->
-        @socket = args.socket
+        @socket = args.socket or ->
+        @requestAuthHeaderKey = args.requestAuthHeaderKey or null
+        @requestAuthHeaderValue = args.requestAuthHeaderValue or null
 
         @actions = {}
         @stores = {}
         @callbacks = {}
 
+    setAuthHeader: (key, value) ->
+        @requestAuthHeaderKey = key
+        @requestAuthHeaderValue = value
     createStore: (store) ->
         store.notify = m.redraw
 
@@ -28,6 +33,9 @@ module.exports = class SuperFlux
         # Call the constructor if present
         if 'init' of store
             store.init()
+
+        store.waitFor = (otherStore) ->
+
 
         return store
 
@@ -60,6 +68,8 @@ module.exports = class SuperFlux
                     for callback in callbacks[name]
                         callback(args)
                 
+        requestAuthHeaderKey = @requestAuthHeaderKey
+        requestAuthHeaderValue = @requestAuthHeaderValue
         Object.keys(async).map (name) ->
             configFn = async[name]
 
@@ -90,6 +100,13 @@ module.exports = class SuperFlux
                     url: options.url
                     data: options.data
                     background: true
+                    config: (xhr) ->
+                        xhr.setRequestHeader('Content-Type', 'application/json')
+                        if requestAuthHeaderKey? and requestAuthHeaderValue?
+                            xhr.setRequestHeader(
+                                requestAuthHeaderKey
+                                requestAuthHeaderValue
+                            )
                 .then(successFn, failureFn)
 
         return @actions
