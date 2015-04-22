@@ -2,7 +2,7 @@ m = require('mithril')
 
 
 module.exports = class SuperFlux
-    constructor: (args) ->
+    constructor: (args={}) ->
         @socket = args.socket or ->
         @requestAuthHeaderKey = args.requestAuthHeaderKey or null
         @requestAuthHeaderValue = args.requestAuthHeaderValue or null
