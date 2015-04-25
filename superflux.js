@@ -64,11 +64,11 @@ var SUPERFLUX = function(args) {
             });
 
             socketListen.map(function(name) {
-                socket.on(name, function(data) {
+                socket.on(name, function(res) {
                     if (name in callbacks) {
                         for (var i = 0; i < callbacks[name].length; i++) {
                             var callback = callbacks[name][i];
-                            callback(args);
+                            callback(res);
                         }
                     }
                 });
@@ -96,7 +96,7 @@ var SUPERFLUX = function(args) {
                     if (successFnName in callbacks) {
                         for (var i = 0; i < callbacks[successFnName].length; i++) {
                             var callback = callbacks[successFnName][i];
-                            callback(args);
+                            callback(res);
                         }
                     }
                 };
@@ -105,7 +105,7 @@ var SUPERFLUX = function(args) {
                     if (failureFnName in callbacks) {
                         for (var i = 0; i < callbacks[failureFnName].length; i++) {
                             var callback = callbacks[failureFnName][i];
-                            callback(args);
+                            callback(res);
                         }
                     }
                 };
