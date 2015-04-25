@@ -1,6 +1,6 @@
 {
     "name": "superflux",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "description": "Opinionated model layer for Mithril based on Flux",
     "keywords": [
         "flux",
@@ -8,11 +8,11 @@
         "superflux"
     ],
     "files": [
-        "index.js",
+        "superflux.js",
         "src/",
         "LICENSE"
     ],
-    "main": "index.js",
+    "main": "superflux.js",
     "author": {
         "name": "David Colgan",
         "email": "dvcolgan@gmail.com",
@@ -26,14 +26,7 @@
         "url": "https://github.com/dvcolgan/superflux/issues"
     },
     "license": "MIT",
-    "scripts": {
-        "test": "jest"
-    },
-    "jest": {
-        "rootDir": "src",
-        "scriptPreprocessor": "../jest-preprocessor.js"
-    },
     "dependencies": {
-        "mithril": "^0.1.30"
+        "mithril": "^0.1.34"
     }
 }
