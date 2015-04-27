@@ -1,5 +1,16 @@
 var m = require('mithril');
 
+// Thanks to http://stackoverflow.com/a/8809472/356789
+function generateUUID(){
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+};
+
 
 var SUPERFLUX = function(args) {
     if (args == null) {
@@ -114,10 +125,12 @@ var SUPERFLUX = function(args) {
                 actions[failureFnName] = failureFn;
 
                 actions[name] = function(args) {
+                    // Pass the same uuid to initial and result callbacks to tie them together
+                    var uuid = generateUUID();
                     if (name in callbacks) {
-                        for (var i = 0; i < callbacks[failureFnName].length; i++) {
-                            var callback = callbacks[failureFnName][i];
-                            callback(args);
+                        for (var i = 0; i < callbacks[name].length; i++) {
+                            var callback = callbacks[name][i];
+                            callback(args, uuid);
                         }
                     }
 
@@ -137,7 +150,11 @@ var SUPERFLUX = function(args) {
                             }
                         }
                     })
-                    .then(successFn, failureFn);
+                    .then(function(successRes) {
+                        successFn(successRes, uuid);
+                    }, function(failureRes) {
+                        failureFn(failureRes, uuid);
+                    });
                 };
             });
 
