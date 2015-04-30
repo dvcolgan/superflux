@@ -19,6 +19,9 @@ var SUPERFLUX = function(args) {
     var socket = args.socket || function(){};
     var requestAuthHeaderKey = args.requestAuthHeaderKey || null;
     var requestAuthHeaderValue = args.requestAuthHeaderValue || null;
+    
+    var successMiddleware = args.successMiddleware || function(res){return res;};
+    var failureMiddleware = args.failureMiddleware || function(res){return res;};
 
     var actions = {};
     var stores = {};
@@ -150,6 +153,26 @@ var SUPERFLUX = function(args) {
                             }
                         }
                     })
+                    .then(
+                        function(res) {
+                            if ('requestSuccess' in callbacks) {
+                                for (var i = 0; i < callbacks.requestSuccess.length; i++) {
+                                    var callback = callbacks.requestSuccess[i];
+                                    callback(res);
+                                }
+                            }
+                            return res;
+                        },
+                        function(err) {
+                            if ('requestFailure' in callbacks) {
+                                for (var i = 0; i < callbacks.requestFailure.length; i++) {
+                                    var callback = callbacks.requestFailure[i];
+                                    callback(err);
+                                }
+                            }
+                            throw err;
+                        }
+                    )
                     .then(function(successRes) {
                         successFn(successRes, uuid);
                     }, function(failureRes) {
